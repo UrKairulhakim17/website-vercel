@@ -1,0 +1,451 @@
+/* --- Variable Warna Global --- */
+:root {
+  /* Tema Gelap (AMOLED) sebagai lalai */
+  --text-color: #ffffff;
+  --bg-color: #000000;
+  --header-bg: rgba(20, 20, 20, 0.4); /* 60% transparent */
+  --card-bg: rgba(25, 25, 25, 0.4); /* 60% transparent */
+  --button-bg: #007aff; /* Apple Blue */
+  --button-hover: #005ecb;
+  --accent-color: #007aff;
+  --card-shadow: rgba(0, 0, 0, 0.4);
+  --border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Definisi Tema Cerah (iCloud Style) --- */
+:root.light-theme {
+  --text-color: #333333;
+  --bg-color: #f5f5f7; /* Latar belakang kelabu lembut iCloud */
+  --header-bg: rgba(245, 245, 247, 0.4); /* 60% transparent */
+  --card-bg: rgba(255, 255, 255, 0.4); /* 60% transparent */
+  --button-bg: #007aff;
+  --button-hover: #005ecb;
+  --accent-color: #007aff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* --- Gaya Asas (Body & Text) --- */
+body {
+  background-image: url("image/background-1.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Latar belakang kekal semasa skrol */
+  color: var(--text-color);
+  min-height: 100vh;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  transition: background-color 0.5s, color 0.5s;
+  background-color: var(--bg-color); /* Fallback dan untuk tema */
+  font-weight: bold;
+}
+
+/* Memastikan warna teks konsisten */
+h1,
+h2,
+h3,
+p,
+nav,
+a {
+  color: var(--text-color);
+}
+
+/* --- Header & Navigasi (iCloud Style) --- */
+header {
+  background-color: var(--header-bg);
+  backdrop-filter: blur(15px); /* Efek kabur lebih kuat */
+  -webkit-backdrop-filter: blur(15px);
+  padding: 15px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color); /* Garisan halus di bawah */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+}
+
+/* --- Gaya Butang Navigasi & Tema --- */
+.nav-button,
+.theme-button {
+  background-color: transparent; /* Tiada latar belakang */
+  color: var(--text-color);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-button:hover,
+.theme-button:hover {
+  background-color: var(--card-bg); /* Latar belakang lembut semasa hover */
+}
+
+.theme-button {
+  border: 1px solid var(--border-color); /* Sempadan halus untuk menonjol sedikit */
+}
+
+.theme-button:hover {
+  border-color: transparent;
+}
+
+/* --- Main Content & Typography --- */
+.content-container {
+  padding: 30px 5%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.content-container p,
+.project-card p {
+  font-size: 1.1em;
+  line-height: 1.8;
+  text-align: left; /* Tukar ke jajaran kiri untuk kebolehbacaan */
+}
+
+/* Kekalkan teks pengenalan di tengah */
+.intro-section p,
+.intro-section h2 {
+  text-align: center;
+}
+
+.intro-section p {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Tambah bayang untuk kebolehbacaan */
+}
+
+h2 {
+  margin-top: 0;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  font-size: 2.5em; /* Lebih besar dan menonjol */
+  font-weight: 600;
+  text-align: center; /* Pusatkan semua tajuk seksyen */
+  border-bottom: none; /* Buang garisan bawah */
+}
+
+/* --- Butang Aksi Utama (CTA Button) --- */
+.cta-button {
+  display: inline-block;
+  background-color: var(--button-bg);
+  color: #ffffff !important; /* Teks sentiasa putih untuk kontras */
+  padding: 12px 25px;
+  border-radius: 25px; /* Lebih bulat */
+  margin-top: 20px;
+  font-weight: bold;
+  text-transform: none; /* Tiada huruf besar */
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.cta-button:hover {
+  background-color: var(--button-hover);
+}
+
+/* --- Butang Sekunder (Glass Button) --- */
+.glass-button {
+  display: inline-block;
+  padding: 15px 30px;
+  border-radius: 25px;
+  background-color: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 15px var(--card-shadow);
+  color: var(--text-color) !important;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Sedikit terang semasa hover */
+  box-shadow: 0 6px 20px var(--card-shadow);
+}
+
+/* --- Portfolio Specific Styles (Grid & Cards) --- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.project-card {
+  background-color: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 25px;
+  border-radius: 18px; /* Sudut lebih bulat seperti iOS/macOS */
+  box-shadow: 0 5px 15px var(--card-shadow);
+  border: 1px solid var(--border-color);
+  transition: box-shadow 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.project-card.visible {
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Swipe up */
+}
+
+.project-card:hover {
+  box-shadow: 0 8px 25px var(--card-shadow); /* Hanya bayangan yang berubah */
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.gallery-item {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Properti untuk animasi baru */
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.gallery-item.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block; /* Menghilangkan ruang kosong di bawah gambar */
+}
+
+.tech-tag {
+  display: inline-block;
+  background-color: rgba(128, 128, 128, 0.1); /* Lebih telus */
+  color: var(--text-color);
+  font-size: 0.8em;
+  padding: 5px 12px;
+  border-radius: 15px; /* Bentuk pil */
+  margin-right: 5px;
+  margin-top: 10px;
+  border: 1px solid var(--border-color);
+}
+
+/* --- Social Page Styles --- */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.social-link-card {
+  background-color: var(--card-bg);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 15px var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.social-link-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px var(--card-shadow);
+}
+
+/* Custom style for the space-gray card */
+.space-gray-card {
+  background-color: #4a4a4a; /* Space Gray color */
+  color: #ffffff; /* Ensure text is white for readability */
+}
+
+.space-gray-card h3,
+.space-gray-card p,
+.space-gray-card .tech-tag {
+  color: #ffffff; /* Ensure all text elements within the card are white */
+}
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 15px;
+    align-items: center; /* Pusatkan semua item dalam header */
+  }
+
+  .header-content {
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px; /* Ruang antara kandungan header dan butang tema */
+    align-items: center; /* Pusatkan tajuk dan navigasi */
+  }
+
+  .header-content h1 {
+    margin: 0; /* Alih keluar margin lalai untuk penjajaran yang lebih baik */
+  }
+
+  nav {
+    justify-content: center; /* Pusatkan butang navigasi */
+  }
+
+  .content-container {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+}
+
+/* --- Web Development Skills Section --- */
+#skills-section {
+    padding: 30px 5%;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+#skills-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.skill-item {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 5px 15px var(--card-shadow);
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.skill-item h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.progress-bar-container {
+    background-color: rgba(255, 255, 255, 0.15); /* More transparent for glassmorphism */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px;
+    height: 25px;
+    overflow: hidden;
+    margin-top: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    background-color: var(--accent-color);
+    width: 0; /* Initial width for animation */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Changed from flex-end to center */
+    font-weight: bold;
+    color: white; /* Ensure text is visible */
+    border-radius: 10px;
+    transition: width 0.8s ease-out; /* Slower and different ease for visual effect */
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* --- Project Card Specific Progress Bars --- */
+.project-progress-container {
+    background-color: rgba(255, 255, 255, 0.15); /* More transparent for glassmorphism */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px;
+    height: 25px;
+    overflow: hidden;
+    margin-top: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.project-progress-bar {
+    background-color: #00FF9D; /* Changed to new color */
+    width: 0; /* Initial width for animation */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #000000; /* Changed to black for better visibility */
+    /* font-size: 0.9em; REMOVED to match skill bar */
+    border-radius: 10px; /* Matched skill bar */
+    transition: width 0.8s ease-out;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2); /* Matched skill bar */
+}
+
+/* --- Project Link Wrapper --- */
+.project-link-wrapper {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+/* --- Page Transition Animations --- */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+body.slide-in {
+  animation: slide-in 0.5s forwards;
+}
+
+body.slide-out {
+  animation: slide-out 0.5s forwards;
+}
+
