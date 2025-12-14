@@ -148,4 +148,3 @@ console.log("script.js loaded and executing.");
 if (portfolioSection) {
     console.log("portfolioSection found, observer initialized.");
 }
-

@@ -79,31 +79,78 @@ nav {
   gap: 10px;
 }
 
-/* --- Gaya Butang Navigasi & Tema --- */
+/* === Unified Liquid Glass Button Style === */
 .nav-button,
-.theme-button {
-  background-color: transparent; /* Tiada latar belakang */
-  color: var(--text-color);
-  border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+.theme-button,
+.cta-button,
+.page-nav-button {
+  position: relative; /* Needed for pseudo-element positioning */
+  overflow: hidden; /* Clips the liquid fill effect */
+  padding: 12px 25px;
+  border-radius: 25px;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg); /* Semi-transparent base */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-weight: bold;
   text-decoration: none;
+  color: var(--text-color) !important;
+  transition: color 0.4s ease;
+  z-index: 0; /* Establish stacking context */
+  display: inline-block; /* Ensure consistency for a and button tags */
+  text-align: center;
+  cursor: pointer;
 }
 
+/* Span inside button for text, to keep it above the pseudo-element */
+.nav-button span,
+.theme-button span,
+.cta-button span,
+.page-nav-button span {
+    position: relative;
+    z-index: 2;
+}
+
+/* The Liquid Fill Element */
+.nav-button::before,
+.theme-button::before,
+.cta-button::before,
+.page-nav-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  padding-bottom: 150%;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 1; /* Sit between the button background and the text span */
+}
+
+/* The Hover Effect */
+.nav-button:hover::before,
+.theme-button:hover::before,
+.cta-button:hover::before,
+.page-nav-button:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Text color change on hover */
 .nav-button:hover,
-.theme-button:hover {
-  background-color: var(--card-bg); /* Latar belakang lembut semasa hover */
+.theme-button:hover,
+.cta-button:hover,
+.page-nav-button:hover {
+  color: #ffffff !important;
 }
 
-.theme-button {
-  border: 1px solid var(--border-color); /* Sempadan halus untuk menonjol sedikit */
-}
-
-.theme-button:hover {
-  border-color: transparent;
+/* Remove default background on hover to let the liquid fill show */
+.nav-button:hover,
+.theme-button:hover,
+.cta-button:hover,
+.page-nav-button:hover {
+    background-color: transparent;
 }
 
 /* --- Main Content & Typography --- */
@@ -138,47 +185,6 @@ h2 {
   font-weight: 600;
   text-align: center; /* Pusatkan semua tajuk seksyen */
   border-bottom: none; /* Buang garisan bawah */
-}
-
-/* --- Butang Aksi Utama (CTA Button) --- */
-.cta-button {
-  display: inline-block;
-  background-color: var(--button-bg);
-  color: #ffffff !important; /* Teks sentiasa putih untuk kontras */
-  padding: 12px 25px;
-  border-radius: 25px; /* Lebih bulat */
-  margin-top: 20px;
-  font-weight: bold;
-  text-transform: none; /* Tiada huruf besar */
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-  border: none;
-}
-
-.cta-button:hover {
-  background-color: var(--button-hover);
-}
-
-/* --- Butang Sekunder (Glass Button) --- */
-.glass-button {
-  display: inline-block;
-  padding: 15px 30px;
-  border-radius: 25px;
-  background-color: var(--card-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 15px var(--card-shadow);
-  color: var(--text-color) !important;
-  font-weight: bold;
-  text-decoration: none;
-  text-align: center;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.glass-button:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Sedikit terang semasa hover */
-  box-shadow: 0 6px 20px var(--card-shadow);
 }
 
 /* --- Portfolio Specific Styles (Grid & Cards) --- */
@@ -449,3 +455,114 @@ body.slide-out {
   animation: slide-out 0.5s forwards;
 }
 
+/* --- Re-apply Liquid Fill to Glass Button --- */
+.glass-button {
+    position: relative;
+    overflow: hidden;
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--text-color) !important;
+    transition: color 0.4s ease;
+    z-index: 0;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.glass-button span {
+    position: relative;
+    z-index: 2;
+}
+
+.glass-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    padding-bottom: 150%;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1;
+}
+
+.glass-button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.glass-button:hover {
+    color: #ffffff !important;
+    background-color: transparent;
+}
+
+
+/* --- Social Button Pulsing Ring Effect on Hover --- */
+.social-button {
+    position: relative;
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--text-color) !important;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* The text content */
+.social-button > span:first-of-type {
+    position: relative;
+    z-index: 2;
+}
+
+/* The ripple rings */
+.social-button .ripple-ring {
+    position: absolute;
+    top: -2px; /* Offset for border */
+    left: -2px; /* Offset for border */
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border: 3px solid rgba(255, 255, 255, 0.7); /* Thicker border, higher opacity */
+    border-radius: 25px; /* Match button shape */
+    transform: scale(0.8);
+    opacity: 0;
+    /* Animation will be applied on hover */
+}
+
+/* On hover, trigger the animation */
+.social-button:hover .ripple-ring {
+    animation: pulse-ring 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; /* Longer duration */
+}
+
+/* Stagger the animations */
+.social-button:hover .ripple-ring:nth-of-type(2) {
+    animation-delay: 0s;
+}
+
+.social-button:hover .ripple-ring:nth-of-type(3) {
+    animation-delay: 0.75s; /* Adjusted delay for longer animation */
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.95);
+        opacity: 1; /* Start with full opacity */
+    }
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+}
