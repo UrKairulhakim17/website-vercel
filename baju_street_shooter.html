@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Baju Street Shooter | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --accent-color: #6c757d;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .description {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .image-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .image-item {
+            background: var(--card-bg);
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 2px;
+        }
+
+        .image-label {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #adb5bd;
+        }
+
+        .navigation {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+            padding-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .image-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Baju Street Shooter</h1>
+        <p class="description">
+            Eksperimentasi reka bentuk pakaian yang menggabungkan elemen fotografi jalanan dengan tipografi moden. Fokus utama adalah pada kualiti visual dan naratif urban yang disampaikan melalui fabrik.
+        </p>
+
+        <div class="gallery">
+            <!-- Row 1: Front Views -->
+            <div class="image-row">
+                <div class="image-item">
+                    <img src="image/Mirul T-shirt  (1)/front.png" alt="Street Shooter Front View">
+                    <div class="image-label">Front Perspective</div>
+                </div>
+                <div class="image-item">
+                    <img src="image/Mirul T-shirt  (1)/front 1.png" alt="Street Shooter Front Detail">
+                    <div class="image-label">Front Detail</div>
+                </div>
+            </div>
+
+            <!-- Row 2: Back Views -->
+            <div class="image-row">
+                <div class="image-item">
+                    <img src="image/Mirul T-shirt  (1)/back.png" alt="Street Shooter Back View">
+                    <div class="image-label">Back Perspective</div>
+                </div>
+                <div class="image-item">
+                    <img src="image/Mirul T-shirt  (1)/back 1.png" alt="Street Shooter Back Detail">
+                    <div class="image-label">Back Detail</div>
+                </div>
+            </div>
+
+            <!-- Row 3: Artboard Designs -->
+            <div class="image-row">
+                <div class="image-item">
+                    <img src="image/ Artboard 3 (1).png" alt="Design Concept 1">
+                    <div class="image-label">Concept Artboard I</div>
+                </div>
+                <div class="image-item">
+                    <img src="image/ Artboard 3 (2).png" alt="Design Concept 2">
+                    <div class="image-label">Concept Artboard II</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <a href="index.html" class="back-link">KEMBALI KE PORTFOLIO</a>
+        </div>
+    </div>
+</body>
+
+</html>
