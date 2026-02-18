@@ -145,30 +145,45 @@ button {
   z-index: 1; /* Sit between the button background and the text span */
 }
 
-/* The Hover Effect */
+/* The Hover & Active Effect */
 .nav-button:hover::before,
 .theme-button:hover::before,
 .cta-button:hover::before,
 .page-nav-button:hover::before,
-.glass-button:hover::before {
+.glass-button:hover::before,
+.nav-button:active::before,
+.theme-button:active::before,
+.cta-button:active::before,
+.page-nav-button:active::before,
+.glass-button:active::before {
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* Text color change on hover */
+/* Text color change on hover & active */
 .nav-button:hover,
 .theme-button:hover,
 .cta-button:hover,
 .page-nav-button:hover,
-.glass-button:hover {
+.glass-button:hover,
+.nav-button:active,
+.theme-button:active,
+.cta-button:active,
+.page-nav-button:active,
+.glass-button:active {
   color: #ffffff !important;
 }
 
-/* Remove default background on hover to let the liquid fill show */
+/* Remove default background on hover & active to let the liquid fill show */
 .nav-button:hover,
 .theme-button:hover,
 .cta-button:hover,
 .page-nav-button:hover,
-.glass-button:hover {
+.glass-button:hover,
+.nav-button:active,
+.theme-button:active,
+.cta-button:active,
+.page-nav-button:active,
+.glass-button:active {
     background-color: transparent;
 }
 
@@ -187,9 +202,18 @@ button {
 }
 
 /* Kekalkan teks pengenalan di tengah */
+.intro-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
 .intro-section p,
 .intro-section h2 {
   text-align: center;
+  margin-bottom: 0;
 }
 
 .intro-section p {
@@ -360,18 +384,6 @@ h2 {
     font-size: 1.8em;
   }
 
-  /* Ensure cards are visible even if JS fails or observer is slow */
-  .project-card {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .project-card.visible {
-    opacity: 1;
-    transform: none;
-  }
-
   .project-grid {
     grid-template-columns: 1fr; /* Single column on mobile */
   }
@@ -412,6 +424,14 @@ h2 {
     box-shadow: 0 5px 15px var(--card-shadow);
     border: 1px solid var(--border-color);
     text-align: center;
+    transition: box-shadow 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.skill-item.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .skill-item h3 {

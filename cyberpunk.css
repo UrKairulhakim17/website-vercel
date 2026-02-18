@@ -120,3 +120,33 @@ a:hover {
     background-color: transparent;
     box-shadow: 0 0 20px #00ffff; /* Cyan */
 }
+
+@media (max-width: 768px) {
+    .cyber-container {
+        padding: 15px;
+        margin: 10px;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        letter-spacing: 2px;
+    }
+
+    h2 {
+        font-size: 1.2em;
+        letter-spacing: 2px;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    .back-button {
+        display: block;
+        margin: 10px 0;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}

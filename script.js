@@ -52,37 +52,33 @@ function scrollToSection(event) {
 // Intersection Observer untuk animasi kad portfolio
 const portfolioSection = document.getElementById('portfolio-section');
 if (portfolioSection) {
-    const portfolioObserver = new IntersectionObserver((entries) => {
+    const projectCards = portfolioSection.querySelectorAll('.project-card');
+    const cardObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            const projectCards = portfolioSection.querySelectorAll('.project-card');
             if (entry.isIntersecting) {
-                // Apabila bahagian portfolio masuk ke dalam viewport, mulakan animasi
-                projectCards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.classList.add('visible');
-                        // Animate internal project progress bar
-                        const projectProgressBar = card.querySelector('.project-progress-bar');
-                        if (projectProgressBar) {
-                            const targetWidth = projectProgressBar.getAttribute('data-width');
-                            projectProgressBar.style.width = targetWidth + '%';
-                        }
-                    }, 150 * index); // 150ms delay between each card
-                });
+                // Apabila kad masuk ke dalam viewport, mulakan animasi
+                entry.target.classList.add('visible');
+                // Animate internal project progress bar
+                const projectProgressBar = entry.target.querySelector('.project-progress-bar');
+                if (projectProgressBar) {
+                    const targetWidth = projectProgressBar.getAttribute('data-width');
+                    projectProgressBar.style.width = targetWidth + '%';
+                }
             } else {
-                // Apabila bahagian portfolio keluar dari viewport, reset animasi
-                projectCards.forEach(card => {
-                    card.classList.remove('visible');
-                    // Reset internal project progress bar
-                    const projectProgressBar = card.querySelector('.project-progress-bar');
-                    if (projectProgressBar) {
-                        projectProgressBar.style.width = '0%';
-                    }
-                });
+                // Apabila kad keluar dari viewport, reset animasi
+                entry.target.classList.remove('visible');
+                // Reset internal project progress bar
+                const projectProgressBar = entry.target.querySelector('.project-progress-bar');
+                if (projectProgressBar) {
+                    projectProgressBar.style.width = '0%';
+                }
             }
         });
-    }, { threshold: 0.2 }); // Trigger when 20% of the section is visible
+    }, { threshold: 0.1 }); // Trigger when 10% of the card is visible
 
-    portfolioObserver.observe(portfolioSection);
+    projectCards.forEach(card => {
+        cardObserver.observe(card);
+    });
 }
 
 
@@ -124,26 +120,32 @@ if (galleryItems.length > 0) {
 // Intersection Observer for skill bars animation
 const skillsSection = document.getElementById('skills-section');
 if (skillsSection) {
-    const skillBarsObserver = new IntersectionObserver((entries, observer) => {
+    const skillItems = skillsSection.querySelectorAll('.skill-item');
+    const skillObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Start animation when skills section is visible
-                document.querySelectorAll('#skills-section .progress-bar').forEach((bar, index) => {
-                    const targetWidth = bar.getAttribute('data-width');
-                    // Add a slight delay for staggered animation
-                    setTimeout(() => {
-                        bar.style.width = targetWidth + '%';
-                    }, 100 * index); 
-                });
-            } else { // Added for repeating animation
-                document.querySelectorAll('#skills-section .progress-bar').forEach(bar => {
-                    bar.style.width = '0%'; // Reset width when not intersecting
-                });
+                // Tambah kelas visible untuk animasi kad
+                entry.target.classList.add('visible');
+                // Animasi progress bar di dalam kad
+                const progressBar = entry.target.querySelector('.progress-bar');
+                if (progressBar) {
+                    const targetWidth = progressBar.getAttribute('data-width');
+                    progressBar.style.width = targetWidth + '%';
+                }
+            } else {
+                // Reset animasi apabila keluar dari viewport
+                entry.target.classList.remove('visible');
+                const progressBar = entry.target.querySelector('.progress-bar');
+                if (progressBar) {
+                    progressBar.style.width = '0%';
+                }
             }
         });
-    }, { threshold: 0.5 }); // Trigger when 50% of the section is visible
+    }, { threshold: 0.1 }); // Trigger when 10% of the item is visible
 
-    skillBarsObserver.observe(skillsSection);
+    skillItems.forEach(item => {
+        skillObserver.observe(item);
+    });
 }
 
 // Debugging logs
