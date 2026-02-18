@@ -2,6 +2,7 @@
 :root {
   /* Tema Gelap (AMOLED) sebagai lalai */
   --text-color: #ffffff;
+  --text-color-rgb: 255, 255, 255;
   --bg-color: #000000;
   --header-bg: rgba(20, 20, 20, 0.4); /* 60% transparent */
   --card-bg: rgba(25, 25, 25, 0.4); /* 60% transparent */
@@ -15,6 +16,7 @@
 /* --- Definisi Tema Cerah (iCloud Style) --- */
 :root.light-theme {
   --text-color: #333333;
+  --text-color-rgb: 51, 51, 51;
   --bg-color: #f5f5f7; /* Latar belakang kelabu lembut iCloud */
   --header-bg: rgba(245, 245, 247, 0.4); /* 60% transparent */
   --card-bg: rgba(255, 255, 255, 0.4); /* 60% transparent */
@@ -80,24 +82,36 @@ nav {
 }
 
 /* === Unified Liquid Glass Button Style === */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
 .nav-button,
 .theme-button,
 .cta-button,
-.page-nav-button {
+.page-nav-button,
+.glass-button {
   position: relative; /* Needed for pseudo-element positioning */
   overflow: hidden; /* Clips the liquid fill effect */
   padding: 12px 25px;
   border-radius: 25px;
   border: 1px solid var(--border-color);
-  background-color: var(--card-bg); /* Semi-transparent base */
+  background-color: rgba(var(--text-color-rgb), 0.05); /* Match background color dynamicly */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   font-weight: bold;
   text-decoration: none;
   color: var(--text-color) !important;
-  transition: color 0.4s ease;
+  transition: color 0.4s ease, background-color 0.4s ease;
   z-index: 0; /* Establish stacking context */
-  display: inline-block; /* Ensure consistency for a and button tags */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   cursor: pointer;
 }
@@ -106,7 +120,8 @@ nav {
 .nav-button span,
 .theme-button span,
 .cta-button span,
-.page-nav-button span {
+.page-nav-button span,
+.glass-button span {
     position: relative;
     z-index: 2;
 }
@@ -115,7 +130,8 @@ nav {
 .nav-button::before,
 .theme-button::before,
 .cta-button::before,
-.page-nav-button::before {
+.page-nav-button::before,
+.glass-button::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -133,7 +149,8 @@ nav {
 .nav-button:hover::before,
 .theme-button:hover::before,
 .cta-button:hover::before,
-.page-nav-button:hover::before {
+.page-nav-button:hover::before,
+.glass-button:hover::before {
   transform: translate(-50%, -50%) scale(1);
 }
 
@@ -141,7 +158,8 @@ nav {
 .nav-button:hover,
 .theme-button:hover,
 .cta-button:hover,
-.page-nav-button:hover {
+.page-nav-button:hover,
+.glass-button:hover {
   color: #ffffff !important;
 }
 
@@ -149,7 +167,8 @@ nav {
 .nav-button:hover,
 .theme-button:hover,
 .cta-button:hover,
-.page-nav-button:hover {
+.page-nav-button:hover,
+.glass-button:hover {
     background-color: transparent;
 }
 
@@ -296,34 +315,73 @@ h2 {
 
 /* --- Media Queries for Responsiveness --- */
 @media (max-width: 768px) {
+  body {
+    background-attachment: scroll; /* Fix for iOS rendering bugs */
+  }
+
   header {
     flex-direction: column;
-    padding: 15px;
-    align-items: center; /* Pusatkan semua item dalam header */
+    padding: 10px;
+    align-items: center;
   }
 
   .header-content {
     flex-direction: column;
-    gap: 15px;
-    margin-bottom: 15px; /* Ruang antara kandungan header dan butang tema */
-    align-items: center; /* Pusatkan tajuk dan navigasi */
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
   }
 
   .header-content h1 {
-    margin: 0; /* Alih keluar margin lalai untuk penjajaran yang lebih baik */
+    font-size: 1.5em;
+    margin: 0;
   }
 
   nav {
-    justify-content: center; /* Pusatkan butang navigasi */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .nav-button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+
+  .theme-button {
+    margin-top: 10px;
   }
 
   .content-container {
-    padding: 20px;
+    padding: 15px;
   }
 
   h2 {
-    font-size: 2em;
+    font-size: 1.8em;
   }
+
+  /* Ensure cards are visible even if JS fails or observer is slow */
+  .project-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .project-card.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+  }
+}
+
+/* Ensure project cards are visible if JS is disabled or not yet loaded */
+.no-js .project-card,
+.no-js .gallery-item {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* --- Web Development Skills Section --- */
@@ -454,55 +512,6 @@ body.slide-in {
 body.slide-out {
   animation: slide-out 0.5s forwards;
 }
-
-/* --- Re-apply Liquid Fill to Glass Button --- */
-.glass-button {
-    position: relative;
-    overflow: hidden;
-    padding: 12px 25px;
-    border-radius: 25px;
-    border: 1px solid var(--border-color);
-    background-color: var(--card-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    font-weight: bold;
-    text-decoration: none;
-    color: var(--text-color) !important;
-    transition: color 0.4s ease;
-    z-index: 0;
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
-}
-
-.glass-button span {
-    position: relative;
-    z-index: 2;
-}
-
-.glass-button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 150%;
-    padding-bottom: 150%;
-    border-radius: 50%;
-    background-color: var(--accent-color);
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-    z-index: 1;
-}
-
-.glass-button:hover::before {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.glass-button:hover {
-    color: #ffffff !important;
-    background-color: transparent;
-}
-
 
 /* --- Social Button Pulsing Ring Effect on Hover --- */
 .social-button {

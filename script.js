@@ -2,6 +2,9 @@
 const themeToggle = document.getElementById('toggle-theme');
 const rootElement = document.documentElement;
 
+// Remove no-js class once script starts executing
+rootElement.classList.remove('no-js');
+
 // Function untuk mengaktifkan/menyimpan tema
 function toggleLightMode() {
     // Tukar kelas 'light-theme' pada elemen <html>
